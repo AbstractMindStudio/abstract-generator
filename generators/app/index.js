@@ -14,7 +14,7 @@ module.exports = yeoman.Base.extend({
                 type: 'input',
                 name: 'appName',
                 message: 'What is your app going to be called?',
-                default: "Web-Project"
+                default: this.appname
             },
             {
                 type: 'input',
@@ -87,6 +87,6 @@ module.exports = yeoman.Base.extend({
     },
 
     end: function () {
-        console.log('Thank you for using our generator!\n Just run \'gulp\' command to start.');
-    }
+        this.log(chalk.cyan('Thank you for using our generator!\n Just run' + chalk.bgRed.bold('\'gulp\'') + 'command to start.'));
+    }.bind(this)
 });
