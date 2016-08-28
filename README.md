@@ -1,4 +1,4 @@
-# generator-abstract [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-abstract [![NPM version][npm-image]][npm-url] 
 > Front-end web app generator for yeoman
 
 ## Installation
