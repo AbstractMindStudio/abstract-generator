@@ -1,1 +1,46 @@
 @import bourbon/bourbon
+@import neat/neat
+@import normalize
+@import grid
+
+$main-color: #0F5CD2
+$main-font: 'Roboto'
+$h-font-size: 1.2rem
+
+body
+	font-family: $main-font, $helvetica
+	font-weight: 400
+	font-size: 14px
+	-webkit-font-smoothing: subpixel-antialiased
+	-moz-osx-font-smoothing: auto
+	+font-feature-settings("liga")
+
+a
+	text-decoration: none
+	color: inherit
+
+.row
+	+row()
+	&--b
+		margin-bottom: 40px
+
+hr
+	border: 0px solid #fff
+	box-shadow: none
+	height: 1px
+	background: rgba(#fff, .3)
+	margin: 15px 0
+	&.dark
+		background: rgba(#000, .3)
+
+@function headings($from:1, $to:6)
+	@if $from == $to
+		@return 'h#{$from}'
+	@else
+		@return 'h#{$from},' + headings($from+1, $to)
+
+#{headings(1,6)}
+	font-family: $main-font, $helvetica
+	text-transform: uppercase
+	font-weight: bold
+	margin: 0

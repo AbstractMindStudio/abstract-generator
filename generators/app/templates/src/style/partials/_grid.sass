@@ -1,0 +1,64 @@
+$border-box-sizing: false;
+
+$from: 1
+$to: 12
+.col
+	+row()
+
+	@function grid($from, $to)
+		@if $from == $to
+			@return '&.s#{$from}'
+		@else
+			@return '&.s#{$from},' + grid($from+1, $to)
+
+	@function grid-offset($from, $to)
+		@if $from == $to
+			@return '&.s#{$from}-offset'
+		@else
+			@return '&.s#{$from}-offset,' + grid-offset($from+1, $to)
+
+	@function input-field($from, $to)
+		@if $from == $to
+			@return '&.input-field.s#{$from}'
+		@else
+			@return '&.input-field.s#{$from},' + input-field($from+1, $to)
+
+	@function input-offset($from, $to)
+		@if $from == $to
+			@return '&.input-field.s#{$from}-offset'
+		@else
+			@return '&.input-field.s#{$from}-offset,' + input-offset($from+1, $to)
+	
+	$container-columns: container-span($from to $to);
+
+	@for $grid-num from $from through $to
+		$columns: nth($grid-num, 1);
+		&.s#{$grid-num}
+			width: flex-grid($columns, $container-columns);
+
+	#{grid($from, $to)}
+		display: block
+		float: left
+		margin-left: flex-gutter($container-columns);
+		&:last-child 
+			margin-left: 0
+
+	+media(max-width 768px)
+
+		#{grid($from, $to)}
+			+span-columns(12)
+
+		#{grid-offset($from, $to)}
+			+shift(0)
+
+	+media(max-width 1169px)
+		+pad(0 25px)
+
+		& > .col 
+			+pad(0)
+
+		#{input-field($from, $to)}
+			+span-columns(12)
+
+		#{input-offset($from, $to)}
+			+span-columns(12)
